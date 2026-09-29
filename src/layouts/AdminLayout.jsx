@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
-import { Outlet, Navigate, Link, useLocation } from 'react-router-dom';
-import { Menu, Bell, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Outlet, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, ExternalLink, ShieldCheck, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useApp } from '../context/AppContext';
 import { AdminSidebar } from '../components/layout/AdminSidebar';
 
 export const AdminLayout = () => {
-  const { isAdminAuthenticated } = useAuth();
+  const { isAdminAuthenticated, logoutAdmin } = useAuth();
+  const { showToast } = useApp();
+  const navigate = useNavigate();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const location = useLocation();
   const scrollContainerRef = React.useRef(null);
+
+  const handleLogout = () => {
+    logoutAdmin();
+    showToast('Admin signed out', 'info');
+    navigate('/admin');
+  };
 
   // Smoothly reset right content scroll position upon route change
   React.useEffect(() => {
@@ -140,6 +149,17 @@ export const AdminLayout = () => {
             >
               <span className="admin-view-text">Store</span> <ExternalLink size={12} />
             </Link>
+
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="btn btn-sand btn-sm admin-signout-btn"
+              style={{ fontSize: '11px', padding: '6px 10px', cursor: 'pointer' }}
+              title="Sign Out"
+              aria-label="Sign Out"
+            >
+              <span className="admin-signout-text">Sign Out</span> <LogOut size={12} />
+            </button>
           </div>
         </header>
 
@@ -176,6 +196,19 @@ export const AdminLayout = () => {
             padding: 20px 16px !important;
           }
         }
+        .admin-signout-btn {
+          border-color: var(--border);
+          color: var(--text-espresso);
+          transition: var(--transition-smooth);
+        }
+        .admin-signout-btn:hover {
+          background-color: var(--danger-bg) !important;
+          border-color: rgba(153, 27, 27, 0.3) !important;
+          color: var(--danger) !important;
+        }
+        .admin-signout-btn:hover svg {
+          stroke: var(--danger) !important;
+        }
         @media (max-width: 640px) {
           .admin-header {
             height: 60px !important;
@@ -192,6 +225,14 @@ export const AdminLayout = () => {
           }
           .admin-main-content {
             padding: 16px 12px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .admin-signout-text {
+            display: none !important;
+          }
+          .admin-signout-btn {
+            padding: 6px 8px !important;
           }
         }
       `}</style>
