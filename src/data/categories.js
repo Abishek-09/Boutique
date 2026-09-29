@@ -1,0 +1,42 @@
+export const CATEGORIES = [
+  {
+    id: 'cat-sarees',
+    name: 'Sarees',
+    slug: 'sarees',
+    description: 'Handwoven Banarasi, Kanjeevaram, Organza & Chanderi sarees crafted by master weavers.',
+    image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80',
+    itemCount: 8,
+  },
+  {
+    id: 'cat-dresses',
+    name: 'Dresses',
+    slug: 'dresses',
+    description: 'Contemporary Indo-Western silhouettes, tiered maxi dresses & artisanal anarkalis.',
+    image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800&auto=format&fit=crop&q=80',
+    itemCount: 6,
+  },
+  {
+    id: 'cat-kurtis',
+    name: 'Kurtis & Sets',
+    slug: 'kurtis',
+    description: 'Breathable pure cotton, silk blend co-ord tunics and embroidered festive kurti sets.',
+    image: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=800&auto=format&fit=crop&q=80',
+    itemCount: 6,
+  },
+  {
+    id: 'cat-jewellery',
+    name: 'Jewellery',
+    slug: 'jewellery',
+    description: 'Heritage Kundan neckpieces, polki earrings, and antique temple brass adornments.',
+    image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800&auto=format&fit=crop&q=80',
+    itemCount: 4,
+  },
+  {
+    id: 'cat-accessories',
+    name: 'Accessories',
+    slug: 'accessories',
+    description: 'Hand-embroidered zardozi potlis, silk dupattas, and handcrafted brocade clutches.',
+    image: 'https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80',
+    itemCount: 4,
+  },
+];
