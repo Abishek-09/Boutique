@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import { CustomerHeader } from '../components/layout/CustomerHeader';
 import { CustomerFooter } from '../components/layout/CustomerFooter';
 import { CartDrawer } from '../components/cart/CartDrawer';
-import { DemoBadge } from '../components/common/DemoBadge';
 
 export const CustomerLayout = () => {
   return (
@@ -14,7 +13,6 @@ export const CustomerLayout = () => {
       </main>
       <CustomerFooter />
       <CartDrawer />
-      <DemoBadge />
     </div>
   );
 };

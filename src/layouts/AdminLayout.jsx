@@ -3,7 +3,6 @@ import { Outlet, Navigate, Link, useLocation } from 'react-router-dom';
 import { Menu, Bell, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { AdminSidebar } from '../components/layout/AdminSidebar';
-import { DemoBadge } from '../components/common/DemoBadge';
 
 export const AdminLayout = () => {
   const { isAdminAuthenticated } = useAuth();
@@ -149,8 +148,6 @@ export const AdminLayout = () => {
           <Outlet />
         </main>
       </div>
-
-      <DemoBadge />
 
       <style>{`
         .admin-layout {

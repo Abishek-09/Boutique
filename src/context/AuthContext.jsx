@@ -7,17 +7,24 @@ const CUSTOMER_STORAGE_KEY = 'maison_customer_auth';
 
 export const AuthProvider = ({ children }) => {
   const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(() => {
-    return localStorage.getItem(ADMIN_STORAGE_KEY) === 'true';
+    try {
+      localStorage.removeItem(ADMIN_STORAGE_KEY);
+      return sessionStorage.getItem(ADMIN_STORAGE_KEY) === 'true';
+    } catch (e) {
+      return false;
+    }
   });
 
   const [adminUser, setAdminUser] = useState(() => {
-    if (localStorage.getItem(ADMIN_STORAGE_KEY) === 'true') {
-      return {
-        name: 'Aaradhya Sharma',
-        email: 'admin@boutique.demo',
-        role: 'Boutique Director & Store Manager',
-      };
-    }
+    try {
+      if (sessionStorage.getItem(ADMIN_STORAGE_KEY) === 'true') {
+        return {
+          name: 'Aaradhya Sharma',
+          email: 'admin@boutique.demo',
+          role: 'Boutique Director & Store Manager',
+        };
+      }
+    } catch (e) {}
     return null;
   });
 
@@ -63,7 +70,10 @@ export const AuthProvider = ({ children }) => {
         role: 'Boutique Director & Store Manager',
       };
       setAdminUser(user);
-      localStorage.setItem(ADMIN_STORAGE_KEY, 'true');
+      try {
+        sessionStorage.setItem(ADMIN_STORAGE_KEY, 'true');
+        localStorage.removeItem(ADMIN_STORAGE_KEY);
+      } catch (e) {}
       return { success: true };
     }
     return { success: false, message: 'Invalid credentials. Use admin@boutique.demo / admin123' };
@@ -72,7 +82,10 @@ export const AuthProvider = ({ children }) => {
   const logoutAdmin = () => {
     setIsAdminAuthenticated(false);
     setAdminUser(null);
-    localStorage.removeItem(ADMIN_STORAGE_KEY);
+    try {
+      sessionStorage.removeItem(ADMIN_STORAGE_KEY);
+      localStorage.removeItem(ADMIN_STORAGE_KEY);
+    } catch (e) {}
   };
 
   const updateCustomerProfile = (updates) => {

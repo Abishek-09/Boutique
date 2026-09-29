@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useApp } from '../../context/AppContext';
 
 export const AdminLoginPage = () => {
-  const { loginAdmin, isAdminAuthenticated } = useAuth();
+  const { loginAdmin, logoutAdmin } = useAuth();
   const { showToast } = useApp();
   const navigate = useNavigate();
 
@@ -13,12 +13,10 @@ export const AdminLoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // If already logged in, navigate straight to dashboard
+  // Whenever opening the admin page, require fresh login
   useEffect(() => {
-    if (isAdminAuthenticated) {
-      navigate('/admin/dashboard', { replace: true });
-    }
-  }, [isAdminAuthenticated, navigate]);
+    logoutAdmin();
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
